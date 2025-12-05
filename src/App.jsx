@@ -196,6 +196,9 @@ export default function App() {
     return currency + ' ' + num.toFixed(2)
   }
 
+const [navOpen, setNavOpen] = useState(false);
+
+
   // CHART DATA
   const dailyChartData = useMemo(() => {
     if (filteredByMonth.length === 0) {
@@ -392,7 +395,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
       {/* NAVBAR */}
-      <nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
+      {/* <nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
@@ -477,7 +480,155 @@ export default function App() {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
+<nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur px-4 py-3 dark:border-slate-800 dark:bg-slate-900/90">
+  <div className="mx-auto flex max-w-6xl items-center justify-between">
+    {/* Logo + Title */}
+    <div className="flex items-center gap-2">
+      <span className="rounded-lg bg-sky-500/10 p-1.5 text-sky-500">₽</span>
+      <div>
+        <h1 className="text-sm font-semibold tracking-tight sm:text-base">
+          Expense Dashboard
+        </h1>
+        <p className="mt-0.5 hidden text-xs text-slate-500 dark:text-slate-400 sm:block">
+          Track daily, monthly & yearly spending
+        </p>
+      </div>
+    </div>
+
+    {/* Toggle Button - MOBILE ONLY */}
+    <button
+      className="block sm:hidden p-2 rounded-lg border border-slate-300 dark:border-slate-700"
+      onClick={() => setNavOpen(!navOpen)}
+    >
+      {navOpen ? "✕" : "☰"}
+    </button>
+
+    {/* Desktop Controls */}
+    <div className="hidden sm:flex flex-wrap items-center gap-3 text-xs">
+      {/* Currency */}
+      <div className="flex flex-col">
+        <span className="mb-0.5 text-[10px] uppercase text-slate-500">Currency</span>
+        <select
+          value={currency}
+          onChange={(e) => setCurrency(e.target.value)}
+          className="h-8 rounded-full border border-slate-200 bg-white px-3 text-xs dark:border-slate-700 dark:bg-slate-900"
+        >
+          <option value="£">£ GBP</option>
+          <option value="$">$ USD</option>
+          <option value="€">€ EUR</option>
+          <option value="₨">₨ PKR</option>
+        </select>
+      </div>
+
+      {/* Month */}
+      <div className="flex flex-col">
+        <span className="mb-0.5 text-[10px] uppercase text-slate-500">Month</span>
+        <input
+          type="month"
+          value={filterMonth}
+          onChange={(e) => setFilterMonth(e.target.value)}
+          className="h-8 rounded-full border border-slate-200 bg-white px-3 text-xs dark:border-slate-700 dark:bg-slate-900"
+        />
+      </div>
+
+      {/* Budget */}
+      <div className="flex flex-col">
+        <span className="mb-0.5 text-[10px] uppercase text-slate-500">Budget</span>
+        <div className="flex h-8 items-center gap-1 rounded-full border border-slate-200 bg-white px-2 text-xs dark:border-slate-700 dark:bg-slate-900">
+          <span className="text-[11px] text-slate-400">{currency}</span>
+          <input
+            type="number"
+            min="0"
+            value={monthlyBudget}
+            onChange={(e) => setMonthlyBudget(e.target.value)}
+            placeholder="0.00"
+            className="flex-1 bg-transparent text-xs outline-none"
+          />
+        </div>
+      </div>
+
+      {/* Theme */}
+      <div className="flex flex-col">
+        <span className="mb-0.5 text-[10px] uppercase text-slate-500">Theme</span>
+        <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 text-[11px] dark:border-slate-700 dark:bg-slate-900">
+          <button
+            onClick={() => setTheme('light')}
+            className={`px-2 py-0.5 rounded-full ${theme === 'light' && 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900'}`}
+          >
+            Light
+          </button>
+          <button
+            onClick={() => setTheme('dark')}
+            className={`px-2 py-0.5 rounded-full ${theme === 'dark' && 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900'}`}
+          >
+            Dark
+          </button>
+          <button
+            onClick={() => setTheme('system')}
+            className={`px-2 py-0.5 rounded-full ${theme === 'system' && 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900'}`}
+          >
+            Sys
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* MOBILE DROPDOWN */}
+  {navOpen && (
+    <div className="sm:hidden mt-3 grid gap-4 text-xs border-t border-slate-200 pt-3 dark:border-slate-800">
+      {/* Currency */}
+      <div className="flex justify-between">
+        <span>Currency</span>
+        <select
+          value={currency}
+          onChange={(e) => setCurrency(e.target.value)}
+          className="h-8 rounded border border-slate-300 bg-white px-2 dark:border-slate-700 dark:bg-slate-900"
+        >
+          <option value="£">£</option>
+          <option value="$">$</option>
+          <option value="€">€</option>
+          <option value="₨">₨</option>
+        </select>
+      </div>
+
+      {/* Month */}
+      <div className="flex justify-between">
+        <span>Month</span>
+        <input
+          type="month"
+          value={filterMonth}
+          onChange={(e) => setFilterMonth(e.target.value)}
+          className="h-8 rounded border border-slate-300 bg-white px-2 dark:border-slate-700 dark:bg-slate-900"
+        />
+      </div>
+
+      {/* Budget */}
+      <div className="flex justify-between">
+        <span>Budget</span>
+        <input
+          type="number"
+          value={monthlyBudget}
+          min="0"
+          onChange={(e) => setMonthlyBudget(e.target.value)}
+          className="h-8 rounded border border-slate-300 bg-white px-2 w-24 dark:border-slate-700 dark:bg-slate-900"
+        />
+      </div>
+
+      {/* Theme */}
+      <div className="flex justify-between items-center">
+        <span>Theme</span>
+        <div className="flex gap-1">
+          <button onClick={() => setTheme('light')} className="px-2 py-0.5 rounded-full border">Light</button>
+          <button onClick={() => setTheme('dark')} className="px-2 py-0.5 rounded-full border">Dark</button>
+          <button onClick={() => setTheme('system')} className="px-2 py-0.5 rounded-full border">Sys</button>
+        </div>
+      </div>
+    </div>
+  )}
+</nav>
+
 
       {/* MAIN */}
       <main className="mx-auto max-w-6xl px-4 pb-10 pt-4 sm:pt-6">
@@ -852,7 +1003,7 @@ export default function App() {
         <footer class="bg-neutral-primary">
           
             <div class="px-4 py-6 bg-neutral-secondary-soft md:flex md:items-center md:justify-between">
-                <span class="text-sm text-body sm:text-center font-semibold text-slate-500 dark:text-slate-100">© {new Date().getFullYear()} <a href="https://saaduk.netlify.app/">Made with ♥ by Saad</a>.
+                <span class="text-sm text-body sm:text-center font-semibold text-slate-500 dark:text-slate-100">© {new Date().getFullYear()} <a href="https://saaduk.netlify.app/">Made with ♥ by Saad.</a>.
                 </span>
               
               </div>
