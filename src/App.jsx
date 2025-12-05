@@ -767,7 +767,7 @@ const [navOpen, setNavOpen] = useState(false);
                   >
                     <span>{e.date}</span>
                     <span>{e.category}</span>
-                    <span className="truncate">{e.note || '-'}</span>
+                    <span className="truncate">{e.note}</span>
                     <span className="text-right">{fmt(e.amount)}</span>
                     {/* <span className="text-center"> */}
                       <button
