@@ -395,92 +395,7 @@ const [navOpen, setNavOpen] = useState(false);
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
       {/* NAVBAR */}
-      {/* <nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="rounded-lg bg-sky-500/10 p-1.5 text-sky-500">
-                ₽
-              </span>
-              <h1 className="text-sm font-semibold tracking-tight sm:text-base">
-                Expense Dashboard
-              </h1>
-            </div>
-            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-              Track daily, monthly & yearly spending with category insights.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 text-xs">
-            <div className="flex flex-col">
-              <span className="mb-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-500">
-                Currency
-              </span>
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-                className="h-8 rounded-full border border-slate-200 bg-white px-3 text-xs outline-none ring-sky-500/40 hover:border-slate-300 focus:border-sky-500 focus:ring-2 dark:border-slate-700 dark:bg-slate-900"
-              >
-                <option value="£">£ GBP</option>
-                <option value="$">$ USD</option>
-                <option value="€">€ EUR</option>
-                <option value="₨">₨ PKR</option>
-              </select>
-            </div>
-            <div className="flex flex-col">
-              <span className="mb-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-500">
-                Month
-              </span>
-              <input
-                type="month"
-                value={filterMonth}
-                onChange={(e) => setFilterMonth(e.target.value)}
-                className="h-8 rounded-full border border-slate-200 bg-white px-3 text-xs outline-none ring-sky-500/40 hover:border-slate-300 focus:border-sky-500 focus:ring-2 dark:border-slate-700 dark:bg-slate-900"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="mb-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-500">
-                Monthly Budget
-              </span>
-              <div className="flex h-8 items-center gap-1 rounded-full border border-slate-200 bg-white px-2 text-xs outline-none ring-sky-500/40 hover:border-slate-300 focus-within:border-sky-500 focus-within:ring-2 dark:border-slate-700 dark:bg-slate-900">
-                <span className="text-[11px] text-slate-400">{currency}</span>
-                <input
-                  type="number"
-                  min="0"
-                  value={monthlyBudget}
-                  onChange={(e) => setMonthlyBudget(e.target.value)}
-                  placeholder="0.00"
-                  className="h-full flex-1 bg-transparent text-xs outline-none"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="mb-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-500">
-                Theme
-              </span>
-              <div className="flex h-8 items-center gap-1 rounded-full border border-slate-200 bg-white px-2 text-[11px] text-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400">
-                <button
-                  onClick={() => setTheme('light')}
-                  className={`rounded-full px-2 py-0.5 ${theme === 'light' ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900' : ''}`}
-                >
-                  Light
-                </button>
-                <button
-                  onClick={() => setTheme('dark')}
-                  className={`rounded-full px-2 py-0.5 ${theme === 'dark' ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900' : ''}`}
-                >
-                  Dark
-                </button>
-                <button
-                  onClick={() => setTheme('system')}
-                  className={`rounded-full px-2 py-0.5 ${theme === 'system' ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900' : ''}`}
-                >
-                  Sys
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav> */}
+     
 <nav className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur px-4 py-3 dark:border-slate-800 dark:bg-slate-900/90">
   <div className="mx-auto flex max-w-6xl items-center justify-between">
     {/* Logo + Title */}
@@ -576,57 +491,65 @@ const [navOpen, setNavOpen] = useState(false);
   </div>
 
   {/* MOBILE DROPDOWN */}
-  {navOpen && (
-    <div className="sm:hidden mt-3 grid gap-4 text-xs border-t border-slate-200 pt-3 dark:border-slate-800">
-      {/* Currency */}
-      <div className="flex justify-between">
-        <span>Currency</span>
-        <select
-          value={currency}
-          onChange={(e) => setCurrency(e.target.value)}
-          className="h-8 rounded border border-slate-300 bg-white px-2 dark:border-slate-700 dark:bg-slate-900"
-        >
-          <option value="£">£</option>
-          <option value="$">$</option>
-          <option value="€">€</option>
-          <option value="₨">₨</option>
-        </select>
-      </div>
+  {/* MOBILE DROPDOWN */}
+<div
+  className={`
+    sm:hidden border-t border-slate-200 dark:border-slate-800
+    transition-all duration-300 ease-in-out overflow-hidden
+    ${navOpen ? "max-h-[420px] opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"}
+  `}
+>
+  <div className="grid gap-4 text-xs py-3">
+    {/* Currency */}
+    <div className="flex justify-between items-center">
+      <span>Currency</span>
+      <select
+        value={currency}
+        onChange={(e) => setCurrency(e.target.value)}
+        className="h-8 rounded border border-slate-300 bg-white px-2 dark:border-slate-700 dark:bg-slate-900"
+      >
+        <option value="£">£</option>
+        <option value="$">$</option>
+        <option value="€">€</option>
+        <option value="₨">₨</option>
+      </select>
+    </div>
 
-      {/* Month */}
-      <div className="flex justify-between">
-        <span>Month</span>
-        <input
-          type="month"
-          value={filterMonth}
-          onChange={(e) => setFilterMonth(e.target.value)}
-          className="h-8 rounded border border-slate-300 bg-white px-2 dark:border-slate-700 dark:bg-slate-900"
-        />
-      </div>
+    {/* Month */}
+    <div className="flex justify-between items-center">
+      <span>Month</span>
+      <input
+        type="month"
+        value={filterMonth}
+        onChange={(e) => setFilterMonth(e.target.value)}
+        className="h-8 rounded border border-slate-300 bg-white px-2 dark:border-slate-700 dark:bg-slate-900"
+      />
+    </div>
 
-      {/* Budget */}
-      <div className="flex justify-between">
-        <span>Budget</span>
-        <input
-          type="number"
-          value={monthlyBudget}
-          min="0"
-          onChange={(e) => setMonthlyBudget(e.target.value)}
-          className="h-8 rounded border border-slate-300 bg-white px-2 w-24 dark:border-slate-700 dark:bg-slate-900"
-        />
-      </div>
+    {/* Budget */}
+    <div className="flex justify-between items-center">
+      <span>Budget</span>
+      <input
+        type="number"
+        value={monthlyBudget}
+        min="0"
+        onChange={(e) => setMonthlyBudget(e.target.value)}
+        className="h-8 rounded border border-slate-300 bg-white px-2 w-24 dark:border-slate-700 dark:bg-slate-900"
+      />
+    </div>
 
-      {/* Theme */}
-      <div className="flex justify-between items-center">
-        <span>Theme</span>
-        <div className="flex gap-1">
-          <button onClick={() => setTheme('light')} className="px-2 py-0.5 rounded-full border">Light</button>
-          <button onClick={() => setTheme('dark')} className="px-2 py-0.5 rounded-full border">Dark</button>
-          <button onClick={() => setTheme('system')} className="px-2 py-0.5 rounded-full border">Sys</button>
-        </div>
+    {/* Theme */}
+    <div className="flex justify-between items-center">
+      <span>Theme</span>
+      <div className="flex gap-1">
+        <button onClick={() => setTheme('light')} className="px-2 py-0.5 rounded-full border">Light</button>
+        <button onClick={() => setTheme('dark')} className="px-2 py-0.5 rounded-full border">Dark</button>
+        <button onClick={() => setTheme('system')} className="px-2 py-0.5 rounded-full border">Sys</button>
       </div>
     </div>
-  )}
+  </div>
+</div>
+
 </nav>
 
 
