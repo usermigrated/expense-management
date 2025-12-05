@@ -621,7 +621,7 @@ const [navOpen, setNavOpen] = useState(false);
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="h-9 w-full rounded-xl border border-slate-200 bg-slate-50 px-2 text-xs outline-none ring-sky-500/40 hover:border-slate-300 focus:border-sky-500 focus:ring-2 dark:border-slate-700 dark:bg-slate-900"
+                  className="h-9 w-full rounded-xl border border-slate-200 bg-slate-50 px-1.5 text-[11px] sm:text-xs sm:px-2 outline-none ring-sky-500/40 hover:border-slate-300 focus:border-sky-500 focus:ring-2 dark:border-slate-700 dark:bg-slate-900"
                 />
               </div>
               <div className="space-y-1">
